@@ -13,6 +13,7 @@
  *
  */
 ;(function($){
+    console.log("OK")
 	var f = $.regexp = function(option){
 	if(!(this instanceof f)) return new f(option);
 	var o = this,c = o.config = $.extend({},f.defaults,option);
@@ -322,7 +323,7 @@
 		// フィルターにステータスを設定
 		_setFilterStatus : function(filter, name, val){
 			var element = filter.element;
-			if(element && element.length){
+			if(element && element.size()){
 				element.data(name, val);
 			}
 			filter[name] = val;
@@ -331,7 +332,7 @@
 		// フィルターのステータスを取得
 		_getFilterStatus : function(filter, name){
 			var element = filter.element;
-			if(element && element.length){
+			if(element && element.size()){
 				return element.data(name);
 			}
 			return filter[name];
@@ -373,7 +374,7 @@
 				append = $.extend(true, {}, appendFilter, append);
 				append.to = $(append.to);
 				append.isNumValues = (append.numCnt == append.valCnt);
-				if(append.to.length && append.values){
+				if(append.to.size() && append.values){
 					var arr = [];
 					$.each(append.values, function(v){
 						arr.push(v);
@@ -465,13 +466,13 @@
 					template : '<input class="form-control" type="text"/>'
 				},
 				'checkbox' : {
-					template : '<div class="checkbox"><label><input type="checkbox"/>{label}</label></div>'
+					template : '<input type="checkbox" id="chk{label}"/><label class="checkbox "for="chk{label}">{label}</label>'
 				},
 				'radio' : {
 					addBlank : true,
 					blankLabel : 'all',
 					blankValue : '',
-					template : '<div class="radio"><label><input type="radio""/>{label}</label></div>'
+					template : '<input type="radio" id="rad{label}"/><label class="radio" for="rad{label}">{label}</label>'
 				},
 				'select' : {
 					addBlank : true,
